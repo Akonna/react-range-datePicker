@@ -90,64 +90,67 @@ const RangeCalendar = createReactClass({
                 clickInYesterday: PropTypes.func,
                 clickInWeek: PropTypes.func,
                 clickInMonth: PropTypes.func,
-                closePanel:PropTypes.func,
-                cancelPanel:PropTypes.func,
+                closePanel: PropTypes.func,
+                cancelPanel: PropTypes.func,
             },
 
             mixins: [CommonMixin],
             closePanel() {
-                 this.onOk();
+                this.onOk();
             },
-            cancelPanel(){
+            cancelPanel() {
                 this.clear();
             },
             clickInToday() {
                 //console.log(format(now));
                 document.getElementsByClassName('rc-kn-btn')[0].style.backgroundColor = '#ff8821';
                 document.getElementsByClassName('rc-kn-btn')[0].style.color = '#ffffff';
-                this.fireSelectValueChange([now, now]);
-                    document.getElementsByClassName('rc-kn-btn')[1].style.backgroundColor = '#ffffff';
+                this.fireSelectValueChange([now, now],true);
+                document.getElementsByClassName('rc-kn-btn')[1].style.backgroundColor = '#ffffff';
                 document.getElementsByClassName('rc-kn-btn')[1].style.color = '#ff8821';
-                  document.getElementsByClassName('rc-kn-btn')[2].style.backgroundColor = '#ffffff';
+                document.getElementsByClassName('rc-kn-btn')[2].style.backgroundColor = '#ffffff';
                 document.getElementsByClassName('rc-kn-btn')[2].style.color = '#ff8821';
-                     document.getElementsByClassName('rc-kn-btn')[3].style.backgroundColor = '#ffffff';
+                document.getElementsByClassName('rc-kn-btn')[3].style.backgroundColor = '#ffffff';
                 document.getElementsByClassName('rc-kn-btn')[3].style.color = '#ff8821';
 
             },
 
             clickInYesterday() {
-                this.fireSelectValueChange([moment().subtract(1, 'days'), moment().subtract(1, 'days')]);
-                  document.getElementsByClassName('rc-kn-btn')[0].style.backgroundColor = '#ffffff';
+
+                document.getElementsByClassName('rc-kn-btn')[0].style.backgroundColor = '#ffffff';
                 document.getElementsByClassName('rc-kn-btn')[0].style.color = '#ff8821';
                 document.getElementsByClassName('rc-kn-btn')[1].style.backgroundColor = '#ff8821';
                 document.getElementsByClassName('rc-kn-btn')[1].style.color = '#ffffff';
                 document.getElementsByClassName('rc-kn-btn')[2].style.backgroundColor = '#ffffff';
                 document.getElementsByClassName('rc-kn-btn')[2].style.color = '#ff8821';
-                     document.getElementsByClassName('rc-kn-btn')[3].style.backgroundColor = '#ffffff';
+                document.getElementsByClassName('rc-kn-btn')[3].style.backgroundColor = '#ffffff';
                 document.getElementsByClassName('rc-kn-btn')[3].style.color = '#ff8821';
+                this.fireSelectValueChange([moment().subtract(1, 'days'), moment().subtract(1, 'days')],true);
             },
             clickInWeek() {
-                this.fireSelectValueChange([now, moment().add('days', 7)]);
-                   document.getElementsByClassName('rc-kn-btn')[0].style.backgroundColor = '#ffffff';
+
+                document.getElementsByClassName('rc-kn-btn')[0].style.backgroundColor = '#ffffff';
                 document.getElementsByClassName('rc-kn-btn')[0].style.color = '#ff8821';
-                 document.getElementsByClassName('rc-kn-btn')[1].style.backgroundColor = '#ffffff';
+                document.getElementsByClassName('rc-kn-btn')[1].style.backgroundColor = '#ffffff';
                 document.getElementsByClassName('rc-kn-btn')[1].style.color = '#ff8821';
                 document.getElementsByClassName('rc-kn-btn')[2].style.backgroundColor = '#ff8821';
                 document.getElementsByClassName('rc-kn-btn')[2].style.color = '#ffffff';
-                    document.getElementsByClassName('rc-kn-btn')[3].style.backgroundColor = '#ffffff';
+                document.getElementsByClassName('rc-kn-btn')[3].style.backgroundColor = '#ffffff';
                 document.getElementsByClassName('rc-kn-btn')[3].style.color = '#ff8821';
+                this.fireSelectValueChange([moment().subtract(7, 'days'), now],true);
 
             },
             clickInMonth() {
-                this.fireSelectValueChange([now, moment().add(1, 'months')]);
-                   document.getElementsByClassName('rc-kn-btn')[0].style.backgroundColor = '#ffffff';
+
+                document.getElementsByClassName('rc-kn-btn')[0].style.backgroundColor = '#ffffff';
                 document.getElementsByClassName('rc-kn-btn')[0].style.color = '#ff8821';
-                 document.getElementsByClassName('rc-kn-btn')[1].style.backgroundColor = '#ffffff';
+                document.getElementsByClassName('rc-kn-btn')[1].style.backgroundColor = '#ffffff';
                 document.getElementsByClassName('rc-kn-btn')[1].style.color = '#ff8821';
-                 document.getElementsByClassName('rc-kn-btn')[2].style.backgroundColor = '#ffffff';
+                document.getElementsByClassName('rc-kn-btn')[2].style.backgroundColor = '#ffffff';
                 document.getElementsByClassName('rc-kn-btn')[2].style.color = '#ff8821';
                 document.getElementsByClassName('rc-kn-btn')[3].style.backgroundColor = '#ff8821';
                 document.getElementsByClassName('rc-kn-btn')[3].style.color = '#ffffff';
+                this.fireSelectValueChange([moment().subtract(1, 'months'), now],true);
             },
             getDefaultProps() {
                 return {
@@ -308,7 +311,7 @@ const RangeCalendar = createReactClass({
             },
 
             onStartPanelChange({ showMonthPanel, showYearPanel }) {
-              
+
                 this.setState({ isStartMonthYearPanelShow: showMonthPanel || showYearPanel });
             },
 
@@ -512,10 +515,10 @@ const RangeCalendar = createReactClass({
                     clickInYesterday: this.clickInYesterday,
                     clickInWeek: this.clickInWeek,
                     clickInMonth: this.clickInMonth,
-                    closePanel:this.closePanel,
-                    cancelPanel:this.cancelPanel,
+                    closePanel: this.closePanel,
+                    cancelPanel: this.cancelPanel,
                     onDayHover: type === 'start' && selectedValue[1] ||
-                        type === 'end' && selectedValue[0] 
+                        type === 'end' && selectedValue[0]
                 };
 
                 let placeholder1;
@@ -594,32 +597,32 @@ const RangeCalendar = createReactClass({
                         enablePrev = {!isClosestMonths || isStartMonthYearPanelShow }
                         enableNext / >
                         < /div>< div className = { cls } > { props.renderFooter() } {
-                            showToday || props.timePicker || showOkButton ? ( < div className = { `${prefixCls}-footer-btn` } > {
-                                    showToday ? ( < TodayButton {...props }
-                                        disabled = { isTodayInView }
-                                        value = { state.value[0] }
-                                        onToday = { this.onToday }
-                                        text = { locale.backToToday }
-                                        />
-                                    ) : null
-                                } {
-                                    props.timePicker ?
-                                        < TimePickerButton {...props }
-                                    showTimePicker = { showTimePicker }
-                                    onOpenTimePicker = { this.onOpenTimePicker }
-                                    onCloseTimePicker = { this.onCloseTimePicker }
-                                    timePickerDisabled = {!this.hasSelectedValue() || hoverValue.length }
-                                    /> : null} {
-                                    showOkButton ?
-                                        < OkButton {...props }
-                                    onOk = { this.onOk }
-                                    okDisabled = {!this.isAllowedDateAndTime(selectedValue) ||
-                                        !this.hasSelectedValue() || hoverValue.length
-                                    }
-                                    /> : null} < /div >
-                                ): null
-                            } < /div> < /div > < /div> < /div > );
-                    },
-                });
+                        showToday || props.timePicker || showOkButton ? ( < div className = { `${prefixCls}-footer-btn` } > {
+                                showToday ? ( < TodayButton {...props }
+                                    disabled = { isTodayInView }
+                                    value = { state.value[0] }
+                                    onToday = { this.onToday }
+                                    text = { locale.backToToday }
+                                    />
+                                ) : null
+                            } {
+                                props.timePicker ?
+                                    < TimePickerButton {...props }
+                                showTimePicker = { showTimePicker }
+                                onOpenTimePicker = { this.onOpenTimePicker }
+                                onCloseTimePicker = { this.onCloseTimePicker }
+                                timePickerDisabled = {!this.hasSelectedValue() || hoverValue.length }
+                                /> : null} {
+                                showOkButton ?
+                                    < OkButton {...props }
+                                onOk = { this.onOk }
+                                okDisabled = {!this.isAllowedDateAndTime(selectedValue) ||
+                                    !this.hasSelectedValue() || hoverValue.length
+                                }
+                                /> : null} < /div >
+                            ): null
+                        } < /div> < /div > < /div> < /div > );
+                },
+            });
 
-            export default RangeCalendar;
+        export default RangeCalendar;
