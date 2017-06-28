@@ -125,6 +125,7 @@ const Test = React.createClass({
 
   render() {
     const state = this.state;
+    console.log(now);
     const calendar = (
       <RangeCalendar
         hoverValue={state.hoverValue}
@@ -132,8 +133,8 @@ const Test = React.createClass({
         showOk={false}
         showClear={false}
         showToday={false}
-        dateInputPlaceholder={[format(now), format(now)]}
-        defaultValue={[now, now.clone().add(1, 'months')]}
+        dateInputPlaceholder={[]}
+        defaultValue={[]}
         locale={zhCN}
       />
     );
@@ -147,7 +148,7 @@ const Test = React.createClass({
           ({ value }) => {
             return (<span>
                 <input
-                  placeholder="please select"
+                  placeholder="今日"
                   style={{ width: 350,border:'1px solid red' }}
                   disabled={state.disabled}
                   readOnly

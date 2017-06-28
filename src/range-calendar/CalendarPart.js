@@ -61,6 +61,7 @@ const CalendarPart = createReactClass({
         defaultOpenValue: value,
         value: selectedValue[index],
       });
+
     return (
       <div className={`${rangeClassName}-part ${rangeClassName}-${direction}`}>
        <div  className={`kn-div`}>
@@ -73,7 +74,7 @@ const CalendarPart = createReactClass({
         </div>
         <div className={`kn-header`}>
         <div style={{"display":'flex',"height":"30px","width":"375px","marginTop":'5px'}}>
-           <div onClick={props.clickInToday} className={`rc-kn-btn`} style={{"backgroundColor":'#ff8821',"color":'#fff'}}> 今天 </div>
+           <div onClick={props.clickInToday} className={`rc-kn-btn`}> 今天 </div>
            <div onClick={props.clickInYesterday} className={`rc-kn-btn`}> 昨天 </div>
            <div onClick={props.clickInWeek} className={`rc-kn-btn`}> 最近7天 </div>
            <div onClick={props.clickInMonth} className={`rc-kn-btn`}> 最近30天 </div>
