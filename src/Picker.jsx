@@ -125,20 +125,29 @@ const Picker = createReactClass({
 
   onCalendarOk() {
     this.close(this.focus);
-     console.log('2');
-       document.body.style.overflow='scroll';
+    console.log('2');
+    document.body.style.overflow='scroll';
+    document.body.style.position = 'inherit';
+    document.body.style.width = 'auto';
+    document.body.style.height = 'auto';
   },
 
   onCalendarClear() {
     this.close(this.focus);
-      console.log('3');
-        document.body.style.overflow='scroll';
+    console.log('3');
+    document.body.style.overflow='scroll';
+    document.body.style.position = 'inherit';
+    document.body.style.width = 'auto';
+    document.body.style.height = 'auto';
   },
 
   onVisibleChange(open) {
     this.setOpen(open); 
     console.log('1');
     document.body.style.overflow='hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
+    document.body.style.height = '100%';
   },
 
   getCalendarElement() {

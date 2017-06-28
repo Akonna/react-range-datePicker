@@ -63,6 +63,23 @@ const CalendarPart = createReactClass({
       });
     return (
       <div className={`${rangeClassName}-part ${rangeClassName}-${direction}`}>
+       <div  className={`kn-div`}>
+          <div className={`kn-cancel`}  onClick={props.cancelPanel}>
+          取消
+          </div>
+          <div onClick={props.closePanel} className={`kn-ok`}>
+          确定
+          </div>
+        </div>
+        <div className={`kn-header`}>
+        <div style={{"display":'flex',"height":"30px","width":"375px","marginTop":'5px'}}>
+           <div onClick={props.clickInToday} className={`rc-kn-btn`} style={{"backgroundColor":'#ff8821',"color":'#fff'}}> 今天 </div>
+           <div onClick={props.clickInYesterday} className={`rc-kn-btn`}> 昨天 </div>
+           <div onClick={props.clickInWeek} className={`rc-kn-btn`}> 最近7天 </div>
+           <div onClick={props.clickInMonth} className={`rc-kn-btn`}> 最近30天 </div>
+           </div>
+        </div>
+        
         <DateInput
           format={format}
           locale={locale}
@@ -76,22 +93,7 @@ const CalendarPart = createReactClass({
           selectedValue={selectedValue[index]}
           onChange={onInputSelect}
         />
-        <div  className={`kn-div`}>
-          <div className={`kn-cancel`}  onClick={props.cancelPanel}>
-          取消
-          </div>
-          <div onClick={props.closePanel} className={`kn-ok`}>
-          确定
-          </div>
-        </div>
-        <div className={`kn-header`}>
-        <div style={{"display":'flex',"height":"30px","width":"375px","marginTop":'5px'}}>
-           <div onClick={props.clickInToday} className={`rc-kn-btn`}> 今天 </div>
-           <div onClick={props.clickInYesterday} className={`rc-kn-btn`}> 昨天 </div>
-           <div onClick={props.clickInWeek} className={`rc-kn-btn`}> 最近7天 </div>
-           <div onClick={props.clickInMonth} className={`rc-kn-btn`}> 最近30天 </div>
-           </div>
-        </div>
+       
         <div style={{ outline: 'none' }}>
           <CalendarHeader
             {...newProps}

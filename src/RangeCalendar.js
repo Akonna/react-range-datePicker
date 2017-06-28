@@ -10,16 +10,8 @@ import TimePickerButton from './calendar/TimePickerButton';
 import CommonMixin from './mixin/CommonMixin';
 import { syncTime, getTodayTime, isAllowedDate } from './util/';
 import picker from './Picker';
-const now = moment();
-const formatStr = 'YYYY-MM-DD';
-now.locale('zh-cn').utcOffset(8);
 
-function format(v) {
-    return v ? v.format(formatStr) : '';
-}
-
-function noop() {}
-
+function noop(){}
 function isEmptyArray(arr) {
     return Array.isArray(arr) && (arr.length === 0 || arr.every(i => !i));
 }
@@ -105,7 +97,7 @@ const RangeCalendar = createReactClass({
                 //console.log(format(now));
                 document.getElementsByClassName('rc-kn-btn')[0].style.backgroundColor = '#ff8821';
                 document.getElementsByClassName('rc-kn-btn')[0].style.color = '#ffffff';
-                this.fireSelectValueChange([now, now],true);
+                this.fireSelectValueChange([moment(), moment()],true);
                 document.getElementsByClassName('rc-kn-btn')[1].style.backgroundColor = '#ffffff';
                 document.getElementsByClassName('rc-kn-btn')[1].style.color = '#ff8821';
                 document.getElementsByClassName('rc-kn-btn')[2].style.backgroundColor = '#ffffff';
@@ -137,7 +129,7 @@ const RangeCalendar = createReactClass({
                 document.getElementsByClassName('rc-kn-btn')[2].style.color = '#ffffff';
                 document.getElementsByClassName('rc-kn-btn')[3].style.backgroundColor = '#ffffff';
                 document.getElementsByClassName('rc-kn-btn')[3].style.color = '#ff8821';
-                this.fireSelectValueChange([moment().subtract(7, 'days'), now],true);
+                this.fireSelectValueChange([moment().subtract(7, 'days'), moment()],true);
 
             },
             clickInMonth() {
@@ -150,7 +142,7 @@ const RangeCalendar = createReactClass({
                 document.getElementsByClassName('rc-kn-btn')[2].style.color = '#ff8821';
                 document.getElementsByClassName('rc-kn-btn')[3].style.backgroundColor = '#ff8821';
                 document.getElementsByClassName('rc-kn-btn')[3].style.color = '#ffffff';
-                this.fireSelectValueChange([moment().subtract(1, 'months'), now],true);
+                this.fireSelectValueChange([moment().subtract(1, 'months'), moment()],true);
             },
             getDefaultProps() {
                 return {
@@ -580,22 +572,10 @@ const RangeCalendar = createReactClass({
                         showTimePicker = { showTimePicker }
                         enablePrev
                         enableNext = {!isClosestMonths || isEndMonthYearPanelShow }
-                        /> < span className = { `${prefixCls}-range-middle` } > ~ < /span > < CalendarPart {...props } {...newProps }
-                        hoverValue = { hoverValue }
-                        direction = "right"
-                        format = { this.getFormat() }
-                        timePickerDisabledTime = { this.getEndDisableTime() }
-                        placeholder = { placeholder2 }
-                        value = { endValue }
-                        onInputSelect = { this.onEndInputSelect }
-                        onValueChange = { this.onEndValueChange }
-                        onPanelChange = { this.onEndPanelChange }
-                        timePicker = { timePicker }
-                        showTimePicker = { showTimePicker }
-                        disabledTime = { this.disabledEndTime }
-                        disabledMonth = { this.disabledEndMonth }
-                        enablePrev = {!isClosestMonths || isStartMonthYearPanelShow }
-                        enableNext / >
+                        /> < span className = { `${prefixCls}-range-middle` } > ~ < /span > 
+
+                        
+
                         < /div>< div className = { cls } > { props.renderFooter() } {
                         showToday || props.timePicker || showOkButton ? ( < div className = { `${prefixCls}-footer-btn` } > {
                                 showToday ? ( < TodayButton {...props }

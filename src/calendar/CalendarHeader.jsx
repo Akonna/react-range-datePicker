@@ -176,33 +176,33 @@ const CalendarHeader = createReactClass({
 
     return (<div className={`${prefixCls}-header`}>
       <div style={{ position: 'relative' }}>
-        {showIf(enablePrev && !showTimePicker,
+       
           <a
             className={`${prefixCls}-prev-year-btn`}
             role="button"
             onClick={this.previousYear}
             title={locale.previousYear}
-          />)}
-        {showIf(enablePrev && !showTimePicker,
+          />
+        
           <a
             className={`${prefixCls}-prev-month-btn`}
             role="button"
             onClick={this.previousMonth}
             title={locale.previousMonth}
-          />)}
+          />
         {this.monthYearElement(showTimePicker)}
-        {showIf(enableNext && !showTimePicker,
+       
           <a
             className={`${prefixCls}-next-month-btn`}
             onClick={this.nextMonth}
             title={locale.nextMonth}
-          />)}
-        {showIf(enableNext && !showTimePicker,
+          />
+     
           <a
             className={`${prefixCls}-next-year-btn`}
             onClick={this.nextYear}
             title={locale.nextYear}
-          />)}
+          />
       </div>
       {panel}
     </div>);

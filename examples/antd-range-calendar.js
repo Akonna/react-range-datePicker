@@ -134,7 +134,7 @@ const Test = React.createClass({
         showToday={false}
         dateInputPlaceholder={[format(now), format(now)]}
         defaultValue={[now, now.clone().add(1, 'months')]}
-        locale={zhCN }
+        locale={zhCN}
       />
     );
     return (
