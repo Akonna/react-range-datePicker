@@ -94,6 +94,10 @@ const RangeCalendar = createReactClass({
                 this.clear();
             },
             clickInToday() {
+            	   const startValue = getTodayTime(this.state.value[0]);
+                const endValue = startValue.clone().add(1, 'months');
+                this.setState({ value: [startValue, endValue] });
+                
                 document.getElementsByClassName('rc-kn-btn')[0].style.backgroundColor = '#ff8821';
                 document.getElementsByClassName('rc-kn-btn')[0].style.color = '#ffffff';
                 this.fireSelectValueChange([moment(), moment()],true);
@@ -107,7 +111,9 @@ const RangeCalendar = createReactClass({
             },
 
             clickInYesterday() {
-
+                const startValue = getTodayTime(this.state.value[0]);
+                const endValue = startValue.clone().add(1, 'months');
+                this.setState({ value: [startValue, endValue] });
                 document.getElementsByClassName('rc-kn-btn')[0].style.backgroundColor = '#ffffff';
                 document.getElementsByClassName('rc-kn-btn')[0].style.color = '#ff8821';
                 document.getElementsByClassName('rc-kn-btn')[1].style.backgroundColor = '#ff8821';
@@ -119,7 +125,9 @@ const RangeCalendar = createReactClass({
                 this.fireSelectValueChange([moment().subtract(1, 'days'), moment().subtract(1, 'days')],true);
             },
             clickInWeek() {
-
+                const startValue = getTodayTime(this.state.value[0]);
+                const endValue = startValue.clone().add(1, 'months');
+                this.setState({ value: [startValue, endValue] });
                 document.getElementsByClassName('rc-kn-btn')[0].style.backgroundColor = '#ffffff';
                 document.getElementsByClassName('rc-kn-btn')[0].style.color = '#ff8821';
                 document.getElementsByClassName('rc-kn-btn')[1].style.backgroundColor = '#ffffff';
@@ -132,6 +140,9 @@ const RangeCalendar = createReactClass({
 
             },
             clickInMonth() {
+            	    const startValue = getTodayTime(this.state.value[0]);
+                const endValue = startValue.clone().add(1, 'months');
+                this.setState({ value: [startValue, endValue] });
                 document.getElementsByClassName('rc-kn-btn')[0].style.backgroundColor = '#ffffff';
                 document.getElementsByClassName('rc-kn-btn')[0].style.color = '#ff8821';
                 document.getElementsByClassName('rc-kn-btn')[1].style.backgroundColor = '#ffffff';
