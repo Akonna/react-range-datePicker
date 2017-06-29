@@ -125,19 +125,21 @@ const Picker = createReactClass({
 
   onCalendarOk() {
     this.close(this.focus);
-    document.body.style.overflow='scroll';
+    document.removeEventListener("touchmove",this.tmove);
   },
 
   onCalendarClear() {
     this.close(this.focus);
-    document.body.style.overflow='scroll';
+    document.removeEventListener("touchmove",this.tmove);
   },
 
   onVisibleChange(open) {
     this.setOpen(open); 
-    document.body.style.overflow='hidden';
+    document.addEventListener("touchmove",this.tmove,false);
   },
-
+  tmove(e){
+    	e.preventDefault();
+   },
   getCalendarElement() {
     const props = this.props;
     const state = this.state;
