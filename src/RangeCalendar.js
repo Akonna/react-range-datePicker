@@ -94,7 +94,6 @@ const RangeCalendar = createReactClass({
                 this.clear();
             },
             clickInToday() {
-                //console.log(format(now));
                 document.getElementsByClassName('rc-kn-btn')[0].style.backgroundColor = '#ff8821';
                 document.getElementsByClassName('rc-kn-btn')[0].style.color = '#ffffff';
                 this.fireSelectValueChange([moment(), moment()],true);
@@ -133,7 +132,6 @@ const RangeCalendar = createReactClass({
 
             },
             clickInMonth() {
-
                 document.getElementsByClassName('rc-kn-btn')[0].style.backgroundColor = '#ffffff';
                 document.getElementsByClassName('rc-kn-btn')[0].style.color = '#ff8821';
                 document.getElementsByClassName('rc-kn-btn')[1].style.backgroundColor = '#ffffff';
@@ -389,6 +387,7 @@ const RangeCalendar = createReactClass({
             },
 
             fireSelectValueChange(selectedValue, direct) {
+         
                 const { timePicker } = this.props;
                 const { prevSelectedValue } = this.state;
                 if (timePicker && timePicker.props.defaultValue) {
