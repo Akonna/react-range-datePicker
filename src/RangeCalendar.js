@@ -461,7 +461,7 @@ const RangeCalendar = createReactClass({
             },
 
             clear() {
-                this.fireSelectValueChange([], true);
+                this.fireSelectValueChange([moment(),moment()], true);
                 this.props.onClear();
             },
 
