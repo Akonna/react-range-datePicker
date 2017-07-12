@@ -6,6 +6,7 @@ import createChainedFunction from 'rc-util/lib/createChainedFunction';
 import KeyCode from 'rc-util/lib/KeyCode';
 import placements from './picker/placements';
 import Trigger from 'rc-trigger';
+import $ from 'jquery';
 
 function noop() {
 }
@@ -134,8 +135,11 @@ const Picker = createReactClass({
   },
 
   onVisibleChange(open) {
-    this.setOpen(open); 
+    this.setOpen(open);
     document.addEventListener("touchmove",this.tmove,false);
+    this.setState({
+      value:[],
+    })
   },
   tmove(e){
     	e.preventDefault();
@@ -196,7 +200,7 @@ const Picker = createReactClass({
     const {
       prefixCls, placement,
       style, getCalendarContainer,
-      align, animation,
+      align,
       disabled,
       transitionName, children,
     } = props;
@@ -210,7 +214,6 @@ const Picker = createReactClass({
       destroyPopupOnHide
       getPopupContainer={getCalendarContainer}
       popupStyle={style}
-      popupAnimation={animation}
       popupTransitionName={transitionName}
       popupVisible={state.open}
       onPopupVisibleChange={this.onVisibleChange}

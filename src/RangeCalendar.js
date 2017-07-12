@@ -82,22 +82,14 @@ const RangeCalendar = createReactClass({
                 clickInYesterday: PropTypes.func,
                 clickInWeek: PropTypes.func,
                 clickInMonth: PropTypes.func,
-                closePanel: PropTypes.func,
-                cancelPanel: PropTypes.func,
             },
 
             mixins: [CommonMixin],
-            closePanel() {
-                this.onOk();
-            },
-            cancelPanel() {
-                this.clear();
-            },
+
             clickInToday() {
-            	   const startValue = getTodayTime(this.state.value[0]);
+                const startValue = getTodayTime(this.state.value[0]);
                 const endValue = startValue.clone().add(1, 'months');
                 this.setState({ value: [startValue, endValue] });
-                
                 document.getElementsByClassName('rc-kn-btn')[0].style.backgroundColor = '#ff8821';
                 document.getElementsByClassName('rc-kn-btn')[0].style.color = '#ffffff';
                 this.fireSelectValueChange([moment(), moment()],true);
@@ -151,7 +143,7 @@ const RangeCalendar = createReactClass({
                 document.getElementsByClassName('rc-kn-btn')[2].style.color = '#ff8821';
                 document.getElementsByClassName('rc-kn-btn')[3].style.backgroundColor = '#ff8821';
                 document.getElementsByClassName('rc-kn-btn')[3].style.color = '#ffffff';
-                this.fireSelectValueChange([moment().subtract(1, 'months'), moment()],true);
+                this.fireSelectValueChange([moment().subtract(29, 'days'), moment()],true);
             },
             getDefaultProps() {
                 return {
@@ -270,7 +262,6 @@ const RangeCalendar = createReactClass({
             },
 
             onOpenTimePicker() {
-
                 this.setState({
                     showTimePicker: true,
                 });
@@ -465,6 +456,9 @@ const RangeCalendar = createReactClass({
                 this.props.onClear();
             },
 
+             close(){
+               this.props.onClear();
+             },
             disabledStartTime(time) {
                 return this.props.disabledTime(time, 'start');
             },
@@ -517,8 +511,6 @@ const RangeCalendar = createReactClass({
                     clickInYesterday: this.clickInYesterday,
                     clickInWeek: this.clickInWeek,
                     clickInMonth: this.clickInMonth,
-                    closePanel: this.closePanel,
-                    cancelPanel: this.cancelPanel,
                     onDayHover: type === 'start' && selectedValue[1] ||
                         type === 'end' && selectedValue[0]
                 };
@@ -582,11 +574,13 @@ const RangeCalendar = createReactClass({
                         showTimePicker = { showTimePicker }
                         enablePrev
                         enableNext = {!isClosestMonths || isEndMonthYearPanelShow }
-                        /> < span className = { `${prefixCls}-range-middle` } > ~ < /span > 
+                                       okPanel={this.props.okPanel}
+                                       cancelPanel={this.props.cancelPanel}
+                        /> < span className = { `${prefixCls}-range-middle` } > ~ </span >
 
                         
 
-                        < /div>< div className = { cls } > { props.renderFooter() } {
+                        </div>< div className = { cls } > { props.renderFooter() } {
                         showToday || props.timePicker || showOkButton ? ( < div className = { `${prefixCls}-footer-btn` } > {
                                 showToday ? ( < TodayButton {...props }
                                     disabled = { isTodayInView }
@@ -609,9 +603,9 @@ const RangeCalendar = createReactClass({
                                 okDisabled = {!this.isAllowedDateAndTime(selectedValue) ||
                                     !this.hasSelectedValue() || hoverValue.length
                                 }
-                                /> : null} < /div >
+                                /> : null} </div>
                             ): null
-                        } < /div> < /div > < /div> < /div > );
+                        } </div></div></div></div> );
                 },
             });
 
