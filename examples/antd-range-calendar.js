@@ -128,7 +128,6 @@ const Test = React.createClass({
     };
   },
   onChange(value) {
-    console.log('onChange', value);
     this.setState({ value });
 
   },
@@ -145,7 +144,12 @@ const Test = React.createClass({
   },
 
   // value={isValidRange(value) && `${format(value[0])} ~ ${format(value[1])}` || ''}
-
+  onOpenChange(){
+    this.setState({
+      value:[],
+    })
+    // this.setState({ value });
+  },
   render() {
     const state = this.state;
     const calendar = (
@@ -169,6 +173,7 @@ const Test = React.createClass({
         onChange={this.onChange}
         calendar={calendar}
         ref="picker"
+        onOpenChange={this.onOpenChange}
       >
         {
           ({ value }) => {
@@ -178,7 +183,7 @@ const Test = React.createClass({
                   placeholder="今日"
                   style={{ width: 350,border:'1px solid red' }}
                   disabled={state.disabled}
-                  readOnly
+                  readOnly="readOnly"
                   className="ant-calendar-picker-input ant-input"
                   
                 />
@@ -189,79 +194,7 @@ const Test = React.createClass({
   },
 });
 
-const Test2 = React.createClass({
-  getInitialState() {
-    return {
-      value: [],
-      hoverValue: [],
-    };
-  },
 
-  onChange(value) {
-    console.log('onChange', value);
-    this.setState({ value });
-
-  },
-  okPanel(){
-    console.log('1');
-    console.log(this.refs.picker);
-    if(this.state.value.length>0){
-      $('#input-2').val(format(this.state.value[0]) +'~'+format(this.state.value[1]));
-    }else{
-      $('#input-2').val('今日');
-    }
-    this.refs.picker.onCalendarOk();
-  },
-  cancelPanel() {
-    this.refs.picker.onCalendarClear();
-  },
-  onHoverChange(hoverValue) {
-    this.setState({ hoverValue });
-  },
-  // value={isValidRange(value) && `${format(value[0])} ~ ${format(value[1])}` || ''}
-
-  render() {
-    const state = this.state;
-    console.log(this.props);
-    const calendar = (
-      <RangeCalendar
-        hoverValue={state.hoverValue}
-        showWeekNumber={false}
-        showOk={false}
-        showClear={false}
-        showToday={false}
-        dateInputPlaceholder={[]}
-        defaultValue={[]}
-        locale={zhCN}
-        okPanel={this.okPanel}
-        cancelPanel={this.cancelPanel}
-      />
-    );
-    return (
-      <Picker
-        value={state.value}
-        onChange={this.onChange}
-        calendar={calendar}
-        ref="picker"
-      >
-        {
-          ({ value }) => {
-            return (<span>
-                <input
-                  id="input-2"
-                  placeholder="今日"
-                  style={{ width: 350,border:'1px solid red' }}
-                  disabled={state.disabled}
-                  readOnly
-                  className="ant-calendar-picker-input ant-input"
-                  
-                />
-                </span>);
-          }
-        }
-      </Picker>);
-  },
-});
 
 ReactDOM.render(
   <div>
@@ -271,7 +204,6 @@ ReactDOM.render(
     fkdjfkdjfkdjfkdfjkdjfkdjfkdjfkdjfkdjfkdjkfjdkfjdkfjkdkfjkdjfkdjfkdjfjjjfkdjfkdjfkdjfkdjfkdjfkdjfkdfjkdjfkdjfkdjfkdjfkdjfkdjkfjdkfjdkfjkdjfkdjfkdjfkdjfkdjkfd
       </div>
          <Test /><br/>
-         <Test2 />
            <div style={{ width:100,fontSize:24}}  className="kn">
     fkdjfkdjfkdjfkdfjkdjfkdjfkdjfkdjfkdjfkdjkfjdkfjdkfjkdkfjkdjfkdjfkdjfjjjfkdjfkdjfkdjfkdjfkdjfkdjfkdfjkdjfkdjfkdjfkdjfkdjfkdjkfjdkfjdkfjkdjfkdjfkdjfkdjfkdjkfd
       </div>

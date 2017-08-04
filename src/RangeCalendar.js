@@ -10,7 +10,7 @@ import TimePickerButton from './calendar/TimePickerButton';
 import CommonMixin from './mixin/CommonMixin';
 import { syncTime, getTodayTime, isAllowedDate } from './util/';
 import picker from './Picker';
-
+import $ from 'jquery';
 function noop(){}
 function isEmptyArray(arr) {
     return Array.isArray(arr) && (arr.length === 0 || arr.every(i => !i));
@@ -389,7 +389,6 @@ const RangeCalendar = createReactClass({
             },
 
             fireSelectValueChange(selectedValue, direct) {
-         
                 const { timePicker } = this.props;
                 const { prevSelectedValue } = this.state;
                 if (timePicker && timePicker.props.defaultValue) {
@@ -423,11 +422,16 @@ const RangeCalendar = createReactClass({
                     this.fireHoverValueChange(selectedValue.concat());
                 }
                 this.props.onChange(selectedValue);
+                
+                if(selectedValue[0]){
+                    this.props.onSelect(selectedValue);
+                }
                 if (direct || selectedValue[0] && selectedValue[1]) {
                     this.setState({
                         prevSelectedValue: selectedValue,
                         firstSelectedValue: null,
                     });
+
                     this.fireHoverValueChange([]);
                     this.props.onSelect(selectedValue);
                 }

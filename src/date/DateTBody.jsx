@@ -64,7 +64,8 @@ const DateTBody = createReactClass({
     const dateClass = `${prefixCls}-date`;
     const todayClass = `${prefixCls}-today`;
     const selectedClass = `${prefixCls}-selected-day`;
-    const selectedDateClass = ``;  // do not move with mouse operation
+    const selectedDateClass = ``;
+    //const selectedDateClass = `${prefixCls}-selected-day`;  // do not move with mouse operation
     const inRangeClass = `${prefixCls}-in-range-cell`;
     const lastMonthDayClass = `${prefixCls}-last-month-cell`;
     const nextMonthDayClass = `${prefixCls}-next-month-btn-day`;
@@ -113,6 +114,7 @@ const DateTBody = createReactClass({
         let next = null;
         let last = null;
         current = dateTable[passed];
+        
         if (jIndex < DateConstants.DATE_COL_COUNT - 1) {
           next = dateTable[passed + 1];
         }
@@ -147,7 +149,7 @@ const DateTBody = createReactClass({
                 selected = true;
                 isActiveWeek = true;
               } else if (current.isAfter(startValue, 'day') &&
-                current.isBefore(endValue, 'day')) {
+                  current.isBefore(endValue, 'day')) {
                 cls += ` ${inRangeClass}`;
               }
             }
@@ -197,30 +199,46 @@ const DateTBody = createReactClass({
         } else {
           const content = contentRender ? contentRender(current, value) : current.date();
           dateHtml = (
-            <div
-              key={getIdFromDate(current)}
-              className={dateClass}
-              aria-selected={selected}
-              aria-disabled={disabled}
-            >
-              {content}
-            </div>);
+              <div
+                  key={getIdFromDate(current)}
+                  className={dateClass}
+                  aria-selected={selected}
+                  aria-disabled={disabled}
+              >
+                {content}
+              </div>);
         }
+        if (isBeforeCurrentMonthYear || isAfterCurrentMonthYear) {
+          dateCells.push(
+              <td
+                  key={passed}
+                  onMouseEnter={disabled ?
+                      undefined : props.onDayHover && props.onDayHover.bind(null, current) || undefined}
+                  role="gridcell"
+                  title={getTitleString(current)} className={cls}
+              >
+                {dateHtml}
+              </td>);
 
+          passed++;
+        } else{
         dateCells.push(
-          <td
-            key={passed}
-            onClick={disabled ? undefined : props.onSelect.bind(null, current)}
-            onMouseEnter={disabled ?
-              undefined : props.onDayHover && props.onDayHover.bind(null, current) || undefined}
-            role="gridcell"
-            title={getTitleString(current)} className={cls}
-          >
-            {dateHtml}
-          </td>);
+            <td
+                key={passed}
+                className={cls}
+                onClick={disabled ? undefined : props.onSelect.bind(null, current)}
+                onMouseEnter={disabled ?
+                    undefined : props.onDayHover && props.onDayHover.bind(null, current) || undefined}
+                role="gridcell"
+                title={getTitleString(current)}
+            >
+              {dateHtml}
+            </td>);
 
         passed++;
       }
+      }
+
 
 
       tableHtml.push(
