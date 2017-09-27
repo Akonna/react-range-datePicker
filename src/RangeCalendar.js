@@ -266,6 +266,7 @@ const RangeCalendar = createReactClass({
                     showTimePicker: true,
                 });
             },
+
             onCloseTimePicker() {
                 this.setState({
                     showTimePicker: false,
